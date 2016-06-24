@@ -1,4 +1,4 @@
-describe('1_eventemitter_embedded_sanity', function() {
+describe('1 sanity', function() {
 
   var expect = require('expect.js');
   var path = require('path');
@@ -38,7 +38,6 @@ describe('1_eventemitter_embedded_sanity', function() {
       var job = kueService.queue.create('test', {'test':'params'});
 
       job.on('complete', function(result){
-        console.log('job result is:::', result);
         kueService.stop(callback);
       });
 
@@ -53,6 +52,32 @@ describe('1_eventemitter_embedded_sanity', function() {
       );
     });
 
+  });
+
+  it('should start up a test job site, check a scheduled job ran', function(callback) {
+
+    var KueService = require('../lib/queue-manager');
+    var config = {site:__dirname + path.sep + 'test-site-schedule'};
+
+    kueService = new KueService();
+    var runCount = 0;
+    kueService.start(config, function(e){
+      if (e) return callback(e);
+
+      kueService.queue.on('job complete', function(job){
+        runCount++;
+      });
+
+      setTimeout(function(){
+
+        return kueService.stop(function (e) {
+          expect(runCount > 0).to.be(true);
+          callback(e);
+        });
+
+      }, 15000);
+
+    });
   });
 
 });
