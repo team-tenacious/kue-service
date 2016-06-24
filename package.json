@@ -1,6 +1,6 @@
 {
   "name": "kue-service",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "./lib/queue-manager",
   "scripts": {
     "test": "mocha test/www/**/**/*.js",
