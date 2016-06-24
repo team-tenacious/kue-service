@@ -1,0 +1,25 @@
+{
+  "name": "kue-service",
+  "version": "0.0.1",
+  "main": "./lib/queue-manager",
+  "scripts": {
+    "test": "mocha test/www/**/**/*.js",
+    "test-all": "find ./test -name '*.js' | xargs mocha -R spec"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "expect.js": "*",
+    "mocha": "*"
+  },
+  "private": true,
+  "dependencies": {
+    "async": "^1.5.2",
+    "bluebird": "^3.4.0",
+    "commander": "^2.9.0",
+    "express": "^4.14.0",
+    "kue": "^0.11.0",
+    "kue-ui": "^0.1.0",
+    "log4js": "^0.6.37",
+    "serve-static": "^1.10.2"
+  }
+}
